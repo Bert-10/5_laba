@@ -19,6 +19,7 @@ namespace _5_laba.Objects
             Y = y;
             Angle = angle;
         }
+
         public virtual void Render(Graphics g)
         {
            
