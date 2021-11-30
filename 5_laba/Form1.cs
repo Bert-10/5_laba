@@ -20,7 +20,7 @@ namespace _5_laba
         MyRectangle circle_2;
         Red RedZone;
         int score = 0;
-        //  Random rand = new Random();
+        
         public Form1()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace _5_laba
             // добавляю реакцию на пересечение
             player.OnOverlap += (p, obj) =>
             {
-                // txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Игрок пересекся с {obj}\n" + txtLog.Text;
+                
                 txtLog.Text = $"[{DateTime.Now:HH:mm:ss}] Игрок пересекся с {obj}\n" + txtLog.Text;
             };
             // добавил реакцию на пересечение с маркером
@@ -43,9 +43,12 @@ namespace _5_laba
                 objects.Remove(m);
                 marker = null;
             };
+
+
             //-------
             player.OnMyRectangleOverlap += (m) =>
             {
+                
                 objects.Remove(m);
                 circle_1 = null;
                 circle_1 = new MyRectangle(0, 0, 0);
@@ -53,7 +56,10 @@ namespace _5_laba
                 circle_1.X = rand.Next(30, pbMain.Width - 30);
                 circle_1.Y = rand.Next(30, pbMain.Height - 30);
                 score++;
+                
             };
+            
+
             player.OnRedOverlap += (m) =>
             {
                 objects.Remove(m);
@@ -64,81 +70,22 @@ namespace _5_laba
                 RedZone.Y = rand.Next(30, pbMain.Height - 30);
                 score--;
             };
-            //--
-
-            /*
-            circle_1.OnCount += (m) =>
-              {
-                  //  score++;
-                  
-                  objects.Remove(m);
-                  circle_1 = null;
-                  circle_1 = new MyRectangle(0, 0, 0);
-                  objects.Add(circle_1);
-                  circle_1.X = rand.Next(30, pbMain.Width - 30);
-                  circle_1.Y = rand.Next(30, pbMain.Height - 30);
-               //   circle_1.count = 100;
-                  
-                  //circle_1.OnCount-=()=> { };
-              };
-
-            */
-            /*
-            circle_2.OnCount += () =>
-            {
-                //  score++;
-                
-                objects.Remove(circle_2);
-                circle_2 = null;
-                circle_2 = new MyRectangle(0, 0, 0);
-                objects.Add(circle_2);
-                circle_2.X = rand.Next(30, pbMain.Width - 30);
-                circle_2.Y = rand.Next(30, pbMain.Height - 30);
-                //circle_2.count = 100;
-                
-               // circle_2.OnCount -= () => { };
-            };
-            */
-
-            /*
-            if (circle_1.count == 0)
-            {
-                //  objects.Remove(m);
-                // circle_1 = null;
-                objects.Remove(circle_1);
-                circle_1 = null;
-                circle_1 = new MyRectangle(0, 0, 0);
-                objects.Add(circle_1);
-                circle_1.X = rand.Next(30, pbMain.Width - 30);
-                circle_1.Y = rand.Next(30, pbMain.Height - 30);
-            }
-            */
+            
             objects.Add(RedZone);
             objects.Add(circle_1);
             objects.Add(circle_2);
-            
             objects.Add(player);
-            //   objects.Add(marker);
-           
-           
-            //  objects.Add(new MyRectangle(50, 50, 0));
-            //  objects.Add(new MyRectangle(100, 100, 45));
-
+            
         }
  
-
-
         private void pbMain_Paint(object sender, PaintEventArgs e)
         {
 
             var g = e.Graphics;       // вытащили объект графики из события
-
-            g.Clear(Color.White);
-
-            //  g.DrawString("Счёт: " + score, new Font("Arial", 14), Brushes.Black, 2, 2);
+            g.Clear(Color.White);            
             label1.Text = "Счёт: " + score;
             updatePlayer();
-           
+         
             // пересчитываем пересечения
             foreach (var obj in objects.ToList())
             {
@@ -148,26 +95,14 @@ namespace _5_laba
                     obj.Overlap(player);
                 }
             }
-            /*
-            // рендерим объекты
-            foreach (var obj in objects)
-            {
-                g.Transform = obj.GetTransform();
-                obj.Render(g);
-            }
-            */
-            
+                       
             foreach (var obj in objects.ToList())
             {
                 g.Transform = obj.GetTransform();
                 obj.Render(g);
-                //---
-             //   circle_1.HELP(obj);
-              //  obj.HELP(circle_1);
+                
             }
-            //   MyRectangle.HELP(obj);
-
-            
+                      
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -216,5 +151,7 @@ namespace _5_laba
             player.X += player.vX;
             player.Y += player.vY;
         }
+              
     }
+
 }

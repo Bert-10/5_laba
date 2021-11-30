@@ -47,7 +47,7 @@ namespace _5_laba.Objects
             path1.Transform(this.GetTransform());
             path2.Transform(obj.GetTransform());
 
-            // используем класс Region, который позволяет определить 
+            // используем метод Region, который позволяет определить 
             // пересечение объектов в данном графическом контексте
             var region = new Region(path1);
             region.Intersect(path2); // пересекаем формы
